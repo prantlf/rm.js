@@ -3,21 +3,22 @@
 [![Latest version](https://img.shields.io/npm/v/@unixcompat/rm.js)
  ![Dependency status](https://img.shields.io/librariesio/release/npm/@unixcompat/rm.js)
 ](https://www.npmjs.com/package/@unixcompat/rm.js)
+[![Coverage](https://codecov.io/gh/prantlf/mkdir.js/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/mkdir.js)
 
 Removes files and directories like the `rm` command.
 
 There are multi-platform file-system commands compatible with `rm` from UN*X implemented for Node.js in JavaScript, like [rimraf], [del-cli] or [del], but they have a different interface and a different behaviour than the `rm` command. Instead of reusing the knowledge of the `rm` command, you would have to learn their new interface. This project aims to provide the well-known interface of the `rm` command.
 
-See also other commands compatible with their counterparts from UN*X - [cp.js] and [mkdir.js].
+See also other commands compatible with their counterparts from UN*X - [cat.js], [cp.js] and [mkdir.js].
 
 ## Installation
 
 This module can be installed in your project using [NPM], [PNPM] or [Yarn]. Make sure, that you use [Node.js] version 14.8 or newer.
 
 ```sh
-$ npm i -D @unixcompat/mkdir.js
-$ pnpm i -D @unixcompat/mkdir.js
-$ yarn add -D @unixcompat/mkdir.js
+$ npm i -D @unixcompat/rm.js
+$ pnpm i -D @unixcompat/rm.js
+$ yarn add -D @unixcompat/rm.js
 ```
 
 ## Command-line Interface
@@ -43,7 +44,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 
-Copyright (c) 2022 Ferdinand Prantl
+Copyright (c) 2022-2023 Ferdinand Prantl
 
 Licensed under the MIT license.
 
@@ -54,5 +55,6 @@ Licensed under the MIT license.
 [rimraf]: https://www.npmjs.com/package/rimraf
 [del-cli]: https://www.npmjs.com/package/del-cli
 [del]: https://www.npmjs.com/package/del
+[cat.js]: https://www.npmjs.com/package/@unixcompat/cat.js
 [cp.js]: https://www.npmjs.com/package/@unixcompat/cp.js
 [mkdir.js]: https://www.npmjs.com/package/@unixcompat/mkdir.js
