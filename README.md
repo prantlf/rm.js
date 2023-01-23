@@ -11,6 +11,24 @@ There are multi-platform file-system commands compatible with `rm` from UN*X imp
 
 See also other commands compatible with their counterparts from UN*X - [cat.js], [cp.js] and [mkdir.js].
 
+## Synopsis
+
+The following scripts from `package.json` won't work on Windows:
+
+    rm -rf dist
+    mkdir -p dist
+    cat src/umd-prolog.txt src/code.js src/umd-epilog.txt > dist/index.umd.js
+    cp src/index.d.ts dist
+
+Replace them with the following ones, which run on any operating system which is supported by Node.js:
+
+    rm.js -rf dist
+    mkdir.js -p dist
+    cat.js src/umd-prolog.txt src/code.js src/umd-epilog.txt > dist/index.umd.js
+    cp.js src/index.d.ts dist
+
+Notice that the only difference is the suffix `.js` behind the command names.
+
 ## Installation
 
 This module can be installed in your project using [NPM], [PNPM] or [Yarn]. Make sure, that you use [Node.js] version 14.8 or newer.
@@ -22,6 +40,8 @@ $ yarn add -D @unixcompat/rm.js
 ```
 
 ## Command-line Interface
+
+See also [`man rm`] for the original documentation.
 
     Usage: rm.js [-Ddfrv] [--] dir...
 
@@ -58,3 +78,4 @@ Licensed under the MIT license.
 [cat.js]: https://www.npmjs.com/package/@unixcompat/cat.js
 [cp.js]: https://www.npmjs.com/package/@unixcompat/cp.js
 [mkdir.js]: https://www.npmjs.com/package/@unixcompat/mkdir.js
+[`man rm`]: https://man7.org/linux/man-pages/man1/rm.1.html
