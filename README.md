@@ -3,7 +3,7 @@
 [![Latest version](https://img.shields.io/npm/v/@unixcompat/rm.js)
  ![Dependency status](https://img.shields.io/librariesio/release/npm/@unixcompat/rm.js)
 ](https://www.npmjs.com/package/@unixcompat/rm.js)
-[![Coverage](https://codecov.io/gh/prantlf/mkdir.js/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/mkdir.js)
+[![Coverage](https://codecov.io/gh/prantlf/rm.js/branch/master/graph/badge.svg)](https://codecov.io/gh/prantlf/rm.js)
 
 Removes files and directories like the `rm` command.
 
