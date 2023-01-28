@@ -1,15 +1,26 @@
 #!/usr/bin/env node
 
+import { readFileSync } from 'fs'
+import { rm, rmdir } from 'fs/promises'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+function getPackage() {
+  const __dirname = dirname(fileURLToPath(import.meta.url))
+  return JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf8'))
+}
+
 function help() {
-  console.log(`${require('../package.json').description}
+  console.log(`${getPackage().description}
 
 Usage: rm.js [-Ddfrv] [--] dir...
 
 Options:
   -D|--dry-run    only print path of each file or directory
-  -d|--directory  deletes a directory only if it is empty
-  -f|--force      ignores non-existent files and directories
-  -r|--recursive  remove files and directories recursively
+  -d|--dir        remove files and empty directories as well
+  -f|--force      ignore non-existent files and directories
+  -R|--recursive  remove files and directories recursively
+  -r              the same as -R
   -v|--verbose    print path of each removed file or directory
   -V|--version    print version number
   -h|--help       print usage instructions
@@ -23,6 +34,11 @@ const { argv } = process
 const args = []
 let   force = false, directory, recursive = false, verbose, dry
 
+function fail(message) {
+  console.error(message)
+  process.exit(1)
+}
+
 for (let i = 2, l = argv.length; i < l; ++i) {
   const arg = argv[i]
   const match = /^(-|--)(no-)?([a-zA-Z][-a-zA-Z]*)(?:=(.*))?$/.exec(arg)
@@ -32,28 +48,27 @@ for (let i = 2, l = argv.length; i < l; ++i) {
         case 'D': case 'dry-run':
           dry = flag
           return
-        case 'd': case 'directory':
+        case 'd': case 'dir':
           directory = flag
           return
         case 'f': case 'force':
           force = flag
           return
-        case 'r': case 'recursive':
+        case 'R': case 'r': case 'recursive':
           recursive = flag
           return
         case 'v': case 'verbose':
           verbose = flag
           return
         case 'V': case 'version':
-          console.log(require('../package.json').version)
+          console.log(getPackage().version)
           process.exit(0)
           break
         case 'h': case 'help':
           help()
           process.exit(0)
       }
-      console.error(`unknown option: "${arg}"`)
-      process.exit(1)
+      fail(`unknown option: "${arg}"`)
     }
     if (match[1] === '-') {
       const flags = match[3].split('')
@@ -71,34 +86,37 @@ for (let i = 2, l = argv.length; i < l; ++i) {
 }
 
 if (!args.length) {
-  console.error('missing files or directories to remove')
+  help()
   process.exit(1)
 }
 
-const formatErr = ({ message }) => {
-  if (message.startsWith('Path is a directory: rm returned EISDIR (is a directory) ')) {
-    message = `EISDIR: ${message.substring(57)} is a directory`
+let arg
+const formatMessage = ({ code, message }) => {
+  if (code === 'EISDIR' || code === 'ERR_FS_EISDIR') {
+    message = `EISDIR: "${arg}" is a directory`
+  } else if (code === 'ENOTEMPTY') {
+    message = `ENOTEMPTY: "${arg}" is not empty`
+  } else if (code === 'ENOENT') {
+    message = `ENOENT: "${arg}" does not exist`
   }
   return message
 }
 
-(async () => {
-  const { rm, rmdir } = require('fs/promises')
-
-  for (const arg of args) {
+try {
+  for (arg of args) {
     if (verbose) console.log(arg)
     if (dry) continue
-    if (directory) {
-      try {
-        await rmdir(arg)
-      } catch (err) {
-        if (!force) throw err
-      }
-    } else {
+    try {
       await rm(arg, { recursive, force })
+    } catch (err) {
+      if (directory && (err.code === 'EISDIR' || err.code === 'ERR_FS_EISDIR')) {
+        await rmdir(arg)
+        continue
+      }
+      throw err
     }
   }
-})().catch(err => {
-  console.error(formatErr(err))
+} catch(err) {
+  console.error(formatMessage(err))
   process.exitCode = 1
-})
+}

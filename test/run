@@ -17,8 +17,8 @@ echo "rm"
 ../bin/rm.js
 if [ "$?" != "1" ]; then exit 1; fi
 
-echo "rm -z"
-../bin/rm.js -z
+echo "rm -Rz"
+../bin/rm.js -Rz
 if [ "$?" != "1" ]; then exit 1; fi
 
 rm -rf out
@@ -31,11 +31,13 @@ touch out/c/d
 echo "rm -D out/a"
 ../bin/rm.js -D out/a
 if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/a"
 if [ ! -f "out/a" ]; then exit 1; fi
 
 echo "rm -v out/a"
 ../bin/rm.js -v out/a
 if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/a"
 if [ -f "out/a" ]; then exit 1; fi
 
 echo "rm -- out/a"
@@ -45,23 +47,33 @@ if [ "$?" != "1" ]; then exit 1; fi
 echo "rm out/b"
 ../bin/rm.js out/b
 if [ "$?" != "1" ]; then exit 1; fi
+echo "checking out/b"
+if [ ! -d "out/b" ]; then exit 1; fi
 
 echo "rm -d out/b"
 ../bin/rm.js -d out/b
 if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/b"
 if [ -d "out/b" ]; then exit 1; fi
 
-echo "rm -f out/b"
-../bin/rm.js -f out/b
-if [ "$?" != "0" ]; then exit 1; fi
+echo "rm -d out/c"
+../bin/rm.js -d out/c
+if [ "$?" != "1" ]; then exit 1; fi
+echo "checking out/c"
+if [ ! -d "out/c" ]; then exit 1; fi
 
 echo "rm -rv out/c"
 ../bin/rm.js -r out/c
 if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/c"
 if [ -d "out/c" ]; then exit 1; fi
 
-echo "rm --directory out/d"
-../bin/rm.js --directory out/d
+echo "rm -f out/e"
+../bin/rm.js -f out/e
+if [ "$?" != "0" ]; then exit 1; fi
+
+echo "rm --dir out/e"
+../bin/rm.js --dir out/e
 if [ "$?" != "1" ]; then exit 1; fi
 
 echo "done"
