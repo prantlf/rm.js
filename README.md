@@ -65,6 +65,8 @@ The following options are specific to this command:
 
     -D|--dry-run    only print path of each file or directory
 
+Also, the arguments may be [BASH patterns]. The pattern matching will ignore symbolic links.
+
 The following options from the POSIX version are not supported:
 
     -i    write a prompt to the standard error before copying
@@ -112,3 +114,4 @@ Licensed under the MIT license.
 [`rm`]: https://nodejs.org/api/fs.html#fsrmpath-options-callback
 [`rmdir`]: https://nodejs.org/api/fs.html#fsrmdirpath-options-callback
 [node:fs]: https://nodejs.org/api/fs.html
+[BASH patterns]: https://www.linuxjournal.com/content/pattern-matching-bash

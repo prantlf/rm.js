@@ -27,6 +27,8 @@ touch out/a
 mkdir out/b
 mkdir out/c
 touch out/c/d
+mkdir out/d
+touch out/d/e
 
 echo "rm -D out/a"
 ../bin/rm.js -D out/a
@@ -75,5 +77,17 @@ if [ "$?" != "0" ]; then exit 1; fi
 echo "rm --dir out/e"
 ../bin/rm.js --dir out/e
 if [ "$?" != "1" ]; then exit 1; fi
+
+echo "rm 'out/*/e'"
+../bin/rm.js 'out/*/e'
+if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/d/e"
+if [ -d "out/d/e" ]; then exit 1; fi
+
+echo "rm -dv 'out/*'"
+../bin/rm.js -dv 'out/*'
+if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/d"
+if [ -d "out/d" ]; then exit 1; fi
 
 echo "done"

@@ -103,7 +103,26 @@ const formatMessage = ({ code, message }) => {
 }
 
 try {
-  for (arg of args) {
+  const files = []
+  const directories = []
+  const patterns = args.filter(src => {
+    if (src.includes('*') || src.includes('?')) return true
+    files.push(src)
+  })
+  if (patterns.length) {
+    const glob = (await import('fast-glob')).default
+    if (verbose) console.log(patterns.join('\n'))
+    const paths = await glob(patterns, {
+      extglob: true, dot: true, onlyFiles: false, markDirectories: true,
+      followSymbolicLinks: false
+    })
+    for (const path of paths) {
+      if (path.endsWith('/')) directories.push(path.slice(0, -1))
+      else files.push(path)
+    }
+  }
+
+  for (arg of files.concat(directories)) {
     if (verbose) console.log(arg)
     if (dry) continue
     try {

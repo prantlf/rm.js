@@ -74,5 +74,8 @@
     "file-system",
     "remove",
     "rm"
-  ]
+  ],
+  "dependencies": {
+    "fast-glob": "3.2.12"
+  }
 }
