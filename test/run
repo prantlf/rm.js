@@ -90,4 +90,12 @@ if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/d"
 if [ -d "out/d" ]; then exit 1; fi
 
+touch out/a
+
+echo "rm -c out '*'"
+../bin/rm.js -c out '*'
+if [ "$?" != "0" ]; then exit 1; fi
+echo "checking out/a"
+if [ -f "out/a" ]; then exit 1; fi
+
 echo "done"

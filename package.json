@@ -63,6 +63,9 @@
       "@semantic-release/git"
     ]
   },
+  "dependencies": {
+    "fast-glob": "3.2.12"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
@@ -72,10 +75,12 @@
   "keywords": [
     "fs",
     "file-system",
+    "filesystem",
+    "file",
+    "directory",
+    "delete",
     "remove",
+    "rmdir",
     "rm"
-  ],
-  "dependencies": {
-    "fast-glob": "3.2.12"
-  }
+  ]
 }

@@ -46,6 +46,7 @@ See also `man rm` for the original [POSIX documentation] or for the extended [Li
     Usage: rm.js [-Ddfrv] [--] dir...
 
     Options:
+      -c|--cwd <dir>  directory to start looking for the source patterns
       -D|--dry-run    only print path of each file or directory
       -d|--dir        remove files and empty directories as well
       -f|--force      ignore non-existent files and directories
@@ -63,6 +64,7 @@ See also `man rm` for the original [POSIX documentation] or for the extended [Li
 
 The following options are specific to this command:
 
+    -c|--cwd <dir>  directory to start looking for the source patterns
     -D|--dry-run    only print path of each file or directory
 
 Also, the arguments may be [BASH patterns]. The pattern matching will ignore symbolic links.

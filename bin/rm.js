@@ -16,6 +16,7 @@ function help() {
 Usage: rm.js [-Ddfrv] [--] dir...
 
 Options:
+  -c|--cwd <dir>  directory to start looking for the source patterns
   -D|--dry-run    only print path of each file or directory
   -d|--dir        remove files and empty directories as well
   -f|--force      ignore non-existent files and directories
@@ -32,7 +33,7 @@ Examples:
 
 const { argv } = process
 const args = []
-let   force = false, directory, recursive = false, verbose, dry
+let   force = false, directory, recursive = false, verbose, dry, cwd
 
 function fail(message) {
   console.error(message)
@@ -45,6 +46,9 @@ for (let i = 2, l = argv.length; i < l; ++i) {
   if (match) {
     const parseArg = (arg, flag) => {
       switch (arg) {
+        case 'c': case 'cwd':
+          cwd = match[4] || argv[++i]
+          return
         case 'D': case 'dry-run':
           dry = flag
           return
@@ -113,10 +117,11 @@ try {
     const glob = (await import('fast-glob')).default
     if (verbose) console.log(patterns.join('\n'))
     const paths = await glob(patterns, {
-      extglob: true, dot: true, onlyFiles: false, markDirectories: true,
+      cwd, extglob: true, dot: true, onlyFiles: false, markDirectories: true,
       followSymbolicLinks: false
     })
-    for (const path of paths) {
+    for (let path of paths) {
+      if (cwd) path = join(cwd, path)
       if (path.endsWith('/')) directories.push(path.slice(0, -1))
       else files.push(path)
     }
