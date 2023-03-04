@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/prantlf/rm.js/compare/v2.0.0...v2.1.0) (2023-03-04)
+
+
+### Features
+
+* Add -c|--cwd argument ([8ca555e](https://github.com/prantlf/rm.js/commit/8ca555e699225238283986398fe9947b01993bff))
+
 # [2.0.0](https://github.com/prantlf/rm.js/compare/v1.0.0...v2.0.0) (2023-01-28)
 
 
