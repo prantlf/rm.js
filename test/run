@@ -6,19 +6,19 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"
 
 echo "rm -h"
-../bin/rm.js -h
+../bin/rm.mjs -h
 if [ "$?" != "0" ]; then exit 1; fi
 
 echo "rm -V"
-../bin/rm.js -V
+../bin/rm.mjs -V
 if [ "$?" != "0" ]; then exit 1; fi
 
 echo "rm"
-../bin/rm.js
+../bin/rm.mjs
 if [ "$?" != "1" ]; then exit 1; fi
 
 echo "rm -Rz"
-../bin/rm.js -Rz
+../bin/rm.mjs -Rz
 if [ "$?" != "1" ]; then exit 1; fi
 
 rm -rf out
@@ -31,61 +31,61 @@ mkdir out/d
 touch out/d/e
 
 echo "rm -D out/a"
-../bin/rm.js -D out/a
+../bin/rm.mjs -D out/a
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/a"
 if [ ! -f "out/a" ]; then exit 1; fi
 
 echo "rm -v out/a"
-../bin/rm.js -v out/a
+../bin/rm.mjs -v out/a
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/a"
 if [ -f "out/a" ]; then exit 1; fi
 
 echo "rm -- out/a"
-../bin/rm.js -- out/a
+../bin/rm.mjs -- out/a
 if [ "$?" != "1" ]; then exit 1; fi
 
 echo "rm out/b"
-../bin/rm.js out/b
+../bin/rm.mjs out/b
 if [ "$?" != "1" ]; then exit 1; fi
 echo "checking out/b"
 if [ ! -d "out/b" ]; then exit 1; fi
 
 echo "rm -d out/b"
-../bin/rm.js -d out/b
+../bin/rm.mjs -d out/b
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/b"
 if [ -d "out/b" ]; then exit 1; fi
 
 echo "rm -d out/c"
-../bin/rm.js -d out/c
+../bin/rm.mjs -d out/c
 if [ "$?" != "1" ]; then exit 1; fi
 echo "checking out/c"
 if [ ! -d "out/c" ]; then exit 1; fi
 
 echo "rm -rv out/c"
-../bin/rm.js -r out/c
+../bin/rm.mjs -r out/c
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/c"
 if [ -d "out/c" ]; then exit 1; fi
 
 echo "rm -f out/e"
-../bin/rm.js -f out/e
+../bin/rm.mjs -f out/e
 if [ "$?" != "0" ]; then exit 1; fi
 
 echo "rm --dir out/e"
-../bin/rm.js --dir out/e
+../bin/rm.mjs --dir out/e
 if [ "$?" != "1" ]; then exit 1; fi
 
 echo "rm 'out/*/e'"
-../bin/rm.js 'out/*/e'
+../bin/rm.mjs 'out/*/e'
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/d/e"
 if [ -d "out/d/e" ]; then exit 1; fi
 
 echo "rm -dv 'out/*'"
-../bin/rm.js -dv 'out/*'
+../bin/rm.mjs -dv 'out/*'
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/d"
 if [ -d "out/d" ]; then exit 1; fi
@@ -93,7 +93,7 @@ if [ -d "out/d" ]; then exit 1; fi
 touch out/a
 
 echo "rm -c out '*'"
-../bin/rm.js -c out '*'
+../bin/rm.mjs -c out '*'
 if [ "$?" != "0" ]; then exit 1; fi
 echo "checking out/a"
 if [ -f "out/a" ]; then exit 1; fi

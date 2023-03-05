@@ -27,7 +27,7 @@
   },
   "type": "module",
   "bin": {
-    "rm.js": "bin/rm.js"
+    "rm.js": "bin/rm.mjs"
   },
   "files": [
     "bin"
