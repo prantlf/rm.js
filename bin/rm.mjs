@@ -13,7 +13,7 @@ function getPackage() {
 function help() {
   console.log(`${getPackage().description}
 
-Usage: rm.js [-Ddfrv] [--] dir...
+Usage: rm-j [-Ddfrv] [--] dir...
 
 Options:
   -c|--cwd <dir>  directory to start looking for the source patterns
@@ -27,8 +27,8 @@ Options:
   -h|--help       print usage instructions
 
 Examples:
-  $ rm.js a
-  $ rm.js -fr /tmp/a`)
+  $ rm-j a
+  $ rm-j -fr /tmp/a`)
 }
 
 const { argv } = process
