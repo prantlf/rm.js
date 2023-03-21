@@ -1,3 +1,18 @@
+# [3.0.0](https://github.com/prantlf/rm.js/compare/v2.1.0...v3.0.0) (2023-03-21)
+
+
+### Bug Fixes
+
+* Rename the bin script to rm-j ([e60f0c0](https://github.com/prantlf/rm.js/commit/e60f0c09e05ffd56e2a7b5d2fe7100d2392f8330))
+* Use .mjs extension to enforce the module type ([749ee62](https://github.com/prantlf/rm.js/commit/749ee620f4dedbb7ff05d4bcc40e6b33b5b33786))
+
+
+### BREAKING CHANGES
+
+* The name of the executable changed from "rm.js" to "rm-j". I'm sorry
+for that, but Windows mistake the suffix ".js" to a file extension and try execute it.
+NPM creates the original file name too, probably to support Cygwin.
+
 # [2.1.0](https://github.com/prantlf/rm.js/compare/v2.0.0...v2.1.0) (2023-03-04)
 
 
