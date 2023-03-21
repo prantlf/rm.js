@@ -9,7 +9,7 @@ Removes files and directories like the `rm` command.
 
 There are multi-platform file-system commands compatible with `rm` from UN*X implemented for Node.js in JavaScript, like [rimraf], [del-cli] or [del], but they have a different interface and a different behaviour than the `rm` command. Instead of reusing the knowledge of the `rm` command, you would have to learn their new interface. This project aims to provide the well-known interface of the `rm` command.
 
-This package offers only command-line interface, because programmatic interface is provided by [`rm`] and [`rmdir`] from [node:fs]. See also other commands compatible with their counterparts from UN*X - [cat.js], [cp.js], [mkdir.js] and [mv.js].
+This package offers only command-line interface, because programmatic interface is provided by [`rm`] and [`rmdir`] from [node:fs]. See also other commands compatible with their counterparts from UN*X - [cat.js], [cp.js], [ln.js], [mkdir.js] and [mv.js].
 
 ## Synopsis
 
@@ -112,6 +112,7 @@ Licensed under the MIT license.
 [del]: https://www.npmjs.com/package/del
 [cat.js]: https://www.npmjs.com/package/@unixcompat/cat.js
 [cp.js]: https://www.npmjs.com/package/@unixcompat/cp.js
+[ln.js]: https://www.npmjs.com/package/@unixcompat/ln.js
 [mkdir.js]: https://www.npmjs.com/package/@unixcompat/mkdir.js
 [mv.js]: https://www.npmjs.com/package/@unixcompat/mv.js
 [POSIX documentation]: https://man7.org/linux/man-pages/man1/rm.1p.html
